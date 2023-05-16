@@ -552,6 +552,9 @@ const u8 *const gItemEffectTable[] =
     [ITEM_CHIPPED_POT - ITEM_POTION]      = gItemEffect_EvoItem,
     [ITEM_GALARICA_CUFF - ITEM_POTION]    = gItemEffect_EvoItem,
     [ITEM_GALARICA_WREATH - ITEM_POTION]  = gItemEffect_EvoItem,
+#if I_RAZOR_CLAW_ON_FIELD >= GEN_8
+    [ITEM_RAZOR_CLAW - ITEM_POTION]       = gItemEffect_EvoItem,
+#endif
 
     // Berries
     [ITEM_CHERI_BERRY - ITEM_POTION]      = gItemEffect_CheriBerry,

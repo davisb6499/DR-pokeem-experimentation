@@ -307,6 +307,7 @@
 #define EVO_SCRIPT_TRIGGER_DMG            36     // Pokémon has specified HP below max, then player interacts trigger
 #define EVO_DARK_SCROLL                   37     // interacts with Scroll of Darkness
 #define EVO_WATER_SCROLL                  38     // interacts with Scroll of Waters
+#define EVO_ITEM_DAY                      39     // specified item is used on Pokémon, is day
 
 #define EVOS_PER_MON 10
 

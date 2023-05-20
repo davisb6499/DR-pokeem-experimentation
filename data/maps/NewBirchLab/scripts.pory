@@ -1,0 +1,55 @@
+mapscripts NewBirchLab_MapScripts {}
+
+script NewBirchLab_EventScript_Pokeball{
+
+    lockall
+    showmonpic(SPECIES_BULBASAUR, 10, 3)
+    msgbox("Do you want to choose Bulbasaur?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        givemon(SPECIES_BULBASAUR, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Bulbasaur!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Bulbasaur!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NicknamePartyMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+}
+
+script NicknameBoxMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_NameReceivedBoxMon)
+    }
+    msgbox("Transferred to PC.")
+}
+
+text NewLab_NotChosen{
+    "You did not choose the Pokemon."
+}

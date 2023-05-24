@@ -41,10 +41,10 @@
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 
-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_UNUSED_0x020    0x20 // Bulbasaur Pokeball
+#define FLAG_UNUSED_0x021    0x21 // Charmander Pokeball
+#define FLAG_UNUSED_0x022    0x22 // Squirtle Pokeball
+#define FLAG_UNUSED_0x023    0x23 // May Littleroot
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag

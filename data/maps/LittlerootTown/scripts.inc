@@ -51,6 +51,7 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
+	call_if_unset FLAG_UNUSED_0x024, LittlerootTown_EventScript_RivalSetup
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
@@ -1026,5 +1027,40 @@ LittlerootTown_EventScript_NewSign::
 	return
 
 
+LittlerootTown_EventScript_RivalSetup::
+	goto_if_unset FLAG_UNUSED_0x020, LittlerootTown_EventScript_RivalSetup_3
+LittlerootTown_EventScript_RivalSetup_2:
+	clearflag FLAG_UNUSED_0x023
+	return
+
+LittlerootTown_EventScript_RivalSetup_1:
+	setflag FLAG_UNUSED_0x023
+	return
+
+LittlerootTown_EventScript_RivalSetup_3:
+	goto_if_unset FLAG_UNUSED_0x021, LittlerootTown_EventScript_RivalSetup_5
+	goto LittlerootTown_EventScript_RivalSetup_2
+
+LittlerootTown_EventScript_RivalSetup_5:
+	goto_if_unset FLAG_UNUSED_0x022, LittlerootTown_EventScript_RivalSetup_1
+	goto LittlerootTown_EventScript_RivalSetup_2
+
+
+LittlerootTown_EventScript_MayRivalBattle::
+	trainerbattle_single TRAINER_MAY_ROUTE_103_TORCHIC, May_Intro, May_Outro
+	msgbox May_PostBattle, MSGBOX_AUTOCLOSE
+	waitmessage
+	end
+
+
 LittlerootTown_EventScript_NewSign_Text_0:
 	.string "Hello World$"
+
+May_Intro::
+	.string "MAY MAY MAY$"
+
+May_Outro::
+	.string "MAY MAY MAY...$"
+
+May_PostBattle::
+	.string "MAY MAY MAY!$"

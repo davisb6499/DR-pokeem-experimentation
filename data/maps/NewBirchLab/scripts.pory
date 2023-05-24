@@ -1,11 +1,107 @@
-mapscripts NewBirchLab_MapScripts {}
+mapscripts NewBirchLab_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: NewBirchLab_EventScript_BallDefault
+}
 
-script NewBirchLab_EventScript_Pokeball{
+script NewBirchLab_EventScript_BallDefault{
+    setvar(VAR_UNUSED_0x40F7, 0)
+}
+
+script NewBirchLab_EventScript_Azurill{
+    lockall
+    faceplayer
+    if(!(flag(FLAG_UNUSED_0x020) || flag(FLAG_UNUSED_0x021) || flag(FLAG_UNUSED_0x022))){
+        msgbox("Do you want other options?", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            if(var(VAR_UNUSED_0x40F7) < 2){
+                addvar(VAR_UNUSED_0x40F7, 1)
+            } else {
+                setvar(VAR_UNUSED_0x40F7, 0)
+            }
+            msgbox("New generation displayed.")
+        } else {
+            msgbox("Choose wisely.")
+        }
+    } else {
+        msgbox("Take care of your Pokemon!")
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_PokeballThree{
+    lockall
+    if(!(flag(FLAG_UNUSED_0x020) || flag(FLAG_UNUSED_0x021) || flag(FLAG_UNUSED_0x022))){
+        switch(var(VAR_UNUSED_0x40F7)){
+            case 0:
+                call(NewBirchLab_EventScript_Mudkip)
+                break
+            case 1:
+                call(NewBirchLab_EventScript_Squirtle)
+                break
+            case 2:
+                call(NewBirchLab_EventScript_Totodile)
+                break
+        }
+    } else {
+        msgbox("Better only take one!")
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_PokeballTwo{
+    lockall
+    if(!(flag(FLAG_UNUSED_0x020) || flag(FLAG_UNUSED_0x021) || flag(FLAG_UNUSED_0x022))){
+        switch(var(VAR_UNUSED_0x40F7)){
+            case 0:
+                call(NewBirchLab_EventScript_Torchic)
+                break
+            case 1:
+                call(NewBirchLab_EventScript_Charmander)
+                break
+            case 2:
+                call(NewBirchLab_EventScript_Cyndaquil)
+                break
+        }
+    } else {
+        msgbox("Better only take one!")
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_PokeballOne{
+    lockall
+    if(!(flag(FLAG_UNUSED_0x020) || flag(FLAG_UNUSED_0x021) || flag(FLAG_UNUSED_0x022))){
+        switch(var(VAR_UNUSED_0x40F7)){
+            case 0:
+                call(NewBirchLab_EventScript_Treecko)
+                break
+            case 1:
+                call(NewBirchLab_EventScript_Bulbasaur)
+                break
+            case 2:
+                call(NewBirchLab_EventScript_Chikorita)
+                break
+        }
+    } else {
+        msgbox("Better only take one!")
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Bulbasaur{
 
     lockall
     showmonpic(SPECIES_BULBASAUR, 10, 3)
     msgbox("Do you want to choose Bulbasaur?", MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
         givemon(SPECIES_BULBASAUR, 50, ITEM_ABILITY_PATCH)
         if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
             playfanfare(MUS_OBTAIN_ITEM)
@@ -18,6 +114,270 @@ script NewBirchLab_EventScript_Pokeball{
             msgbox("Received Bulbasaur!")
             removeobject(1)
             setflag(FLAG_UNUSED_0x020)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Chikorita{
+
+    lockall
+    showmonpic(SPECIES_CHIKORITA, 10, 3)
+    msgbox("Do you want to choose Chikorita?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_CHIKORITA, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Chikorita!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Chikorita!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Treecko{
+
+    lockall
+    showmonpic(SPECIES_TREECKO, 10, 3)
+    msgbox("Do you want to choose Treecko?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_TREECKO, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Treecko!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Treecko!")
+            removeobject(1)
+            setflag(FLAG_UNUSED_0x020)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Charmander{
+
+    lockall
+    showmonpic(SPECIES_CHARMANDER, 10, 3)
+    msgbox("Do you want to choose Charmander?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_CHARMANDER, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Charmander!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Charmander!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Cyndaquil{
+
+    lockall
+    showmonpic(SPECIES_CYNDAQUIL, 10, 3)
+    msgbox("Do you want to choose Cyndaquil?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_CYNDAQUIL, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Cyndaquil!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Cyndaquil!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Torchic{
+
+    lockall
+    showmonpic(SPECIES_TORCHIC, 10, 3)
+    msgbox("Do you want to choose Torchic?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_TORCHIC, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Torchic!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Torchic!")
+            removeobject(2)
+            setflag(FLAG_UNUSED_0x021)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Squirtle{
+
+    lockall
+    showmonpic(SPECIES_SQUIRTLE, 10, 3)
+    msgbox("Do you want to choose Squirtle?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_SQUIRTLE, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Squirtle!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Squirtle!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Totodile{
+
+    lockall
+    showmonpic(SPECIES_TOTODILE, 10, 3)
+    msgbox("Do you want to choose Totodile?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_TOTODILE, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Totodile!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Totodile!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
+            call(NicknameBoxMon)
+        } else {
+            hidemonpic
+            msgbox("You have no room for this Pokemon!")
+        }
+    } else {
+        hidemonpic
+        msgbox(NewLab_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script NewBirchLab_EventScript_Mudkip{
+
+    lockall
+    showmonpic(SPECIES_MUDKIP, 10, 3)
+    msgbox("Do you want to choose Mudkip?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_SYS_POKEMON_GET)
+        givemon(SPECIES_MUDKIP, 50, ITEM_ABILITY_PATCH)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Mudkip!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
+            call(NicknamePartyMon)
+        } elif (var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Mudkip!")
+            removeobject(3)
+            setflag(FLAG_UNUSED_0x022)
             call(NicknameBoxMon)
         } else {
             hidemonpic

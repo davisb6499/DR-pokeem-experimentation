@@ -1037,7 +1037,7 @@ script LittlerootTown_EventScript_RivalSetup{
 }
 
 script LittlerootTown_EventScript_MayRivalBattle{
-	trainerbattle_single(TRAINER_MAY_ROUTE_103_TORCHIC, May_Intro, May_Outro)
+	trainerbattle_single(TRAINER_MAY_ROUTE_103_TORCHIC, May_Intro, May_Outro, RivalBattleOver)
 	msgbox(May_PostBattle, MSGBOX_AUTOCLOSE)
 	waitmessage
 	end
@@ -1049,6 +1049,19 @@ text May_Intro{
 
 text May_Outro{
 	"MAY MAY MAY..."
+}
+
+script RivalBattleOver{
+	lockall
+	applymovement(9, May_PostMovement)
+	waitmovement(0)
+	removeobject(10)
+	
+}
+
+movement May_PostMovement{
+	walk_down
+	walk_left * 9
 }
 
 text May_PostBattle{

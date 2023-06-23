@@ -1047,11 +1047,32 @@ LittlerootTown_EventScript_RivalSetup_5:
 
 
 LittlerootTown_EventScript_MayRivalBattle::
-	trainerbattle_single TRAINER_MAY_ROUTE_103_TORCHIC, May_Intro, May_Outro
+	trainerbattle_single TRAINER_MAY_ROUTE_103_TORCHIC, May_Intro, May_Outro, RivalBattleOver
 	msgbox May_PostBattle, MSGBOX_AUTOCLOSE
 	waitmessage
 	end
 
+
+RivalBattleOver::
+	lockall
+	applymovement 9, May_PostMovement
+	waitmovement 0
+	removeobject 10
+	return
+
+
+May_PostMovement:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
 
 LittlerootTown_EventScript_NewSign_Text_0:
 	.string "Hello World$"
